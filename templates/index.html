@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./static/css/output.css" />
+    <title>ArticleGen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <nav class="bg-black text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="text-xl font-bold">MyBrand</a>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+          <input type="checkbox" id="menu-toggle" class="peer hidden" />
+          <label for="menu-toggle" class="cursor-pointer">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </label>
+        </div>
+      </div>
+
+      <!-- Mobile Menu (This is now inside the main flow) -->
+      <div
+        class="hidden peer-checked:flex flex-col md:hidden bg-gray-800 text-center mt-4 space-y-2 p-4"
+      >
+        <a href="#" class="block py-2 hover:bg-gray-700">Home</a>
+        <a href="#" class="block py-2 hover:bg-gray-700">About</a>
+        <a href="#" class="block py-2 hover:bg-gray-700">Services</a>
+        <a href="#" class="block py-2 hover:bg-gray-700">Contact</a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-6 justify-center mt-4">
+        <li><a href="#" class="hover:text-gray-400">Home</a></li>
+        <li><a href="#" class="hover:text-gray-400">About</a></li>
+        <li><a href="#" class="hover:text-gray-400">Services</a></li>
+        <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
