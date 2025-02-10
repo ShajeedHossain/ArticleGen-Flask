@@ -20,11 +20,11 @@
 
 ### PC Version
 
-![PC Version](.\screenshots\pc.png)
+![PC Version](pc.png)
 
 ### Mobile Version
 
-![Mobile Version](.\screenshots\mob.png)
+![Mobile Version](mob.png)
 
 ### Set up Gemini API Key
 
