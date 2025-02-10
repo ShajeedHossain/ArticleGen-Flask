@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,24 +14,56 @@
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex-shrink-0">
-            <a href="#" class="text-white text-xl font-bold">MyBrand</a>
+            <a href="generated-icon.png" class="text-white text-xl font-bold"
+              >ArticleGen</a
+            >
           </div>
-          
+
           <!-- Desktop Menu -->
           <div class="hidden md:block">
             <div class="ml-10 flex items-center space-x-4">
-              <a href="#" class="text-white hover:text-gray-300 px-3 py-2 rounded-md">Home</a>
-              <a href="#" class="text-white hover:text-gray-300 px-3 py-2 rounded-md">About</a>
-              <a href="#" class="text-white hover:text-gray-300 px-3 py-2 rounded-md">Services</a>
-              <a href="#" class="text-white hover:text-gray-300 px-3 py-2 rounded-md">Contact</a>
+              <a
+                href="#"
+                class="text-white hover:text-gray-300 px-3 py-2 rounded-md"
+                >Home</a
+              >
+              <a
+                href="#"
+                class="text-white hover:text-gray-300 px-3 py-2 rounded-md"
+                >About</a
+              >
+              <a
+                href="#"
+                class="text-white hover:text-gray-300 px-3 py-2 rounded-md"
+                >Services</a
+              >
+              <a
+                href="#"
+                class="text-white hover:text-gray-300 px-3 py-2 rounded-md"
+                >Contact</a
+              >
             </div>
           </div>
 
           <!-- Mobile Menu Button -->
           <div class="md:hidden">
-            <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-400 hover:text-white focus:outline-none">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <button
+              type="button"
+              onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+              class="text-gray-400 hover:text-white focus:outline-none"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -42,12 +73,95 @@
       <!-- Mobile Menu -->
       <div class="hidden md:hidden" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <a href="#" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md">Home</a>
-          <a href="#" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md">About</a>
-          <a href="#" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md">Services</a>
-          <a href="#" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md">Contact</a>
+          <a
+            href="#"
+            class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md"
+            >About</a
+          >
+          <a
+            href="#"
+            class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md"
+            >Services</a
+          >
+          <a
+            href="#"
+            class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md"
+            >Contact</a
+          >
         </div>
       </div>
     </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+      <h2 class="text-xl font-semibold text-gray-800">Enter your topic</h2>
+      <!-- Textarea for user input -->
+      <textarea
+        id="prompt"
+        rows="4"
+        class="w-full mt-3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Mention or explain the title of your blog here..."
+      ></textarea>
+
+      <button
+        id="generateBtn"
+        class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        Generate
+      </button>
+    </div>
+
+    <!-- Output Section -->
+    <div
+      class="max-w-7xl mx-auto mt-8 p-6 bg-gray-200 min-h-[300px] rounded-lg shadow-md"
+    >
+      <h2 class="text-xl font-semibold text-gray-800">Generated Content</h2>
+      <!-- Default message or loading message will appear here initially -->
+      <p class="mt-4 text-gray-700" id="output">
+        Your generated content will appear here...
+      </p>
+    </div>
+
+    <script>
+      // Function to take the prompt and fetch the output
+      const populate = async () => {
+        let prompt = document.getElementById("prompt").value;
+        let output = document.getElementById("output");
+
+        // Set loading message while waiting for the response
+        output.innerHTML = "Generating content, please wait...";
+
+        try {
+          // Send the POST request
+          let response = await fetch("/generate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ prompt: prompt }),
+          });
+
+          // Wait for the response
+          let data = await response.text();
+
+          // Update the output section with the generated content
+          output.innerHTML = `
+            <p class="mt-4 text-gray-700">${data}</p>
+          `;
+        } catch (error) {
+          // In case of error, show a failure message
+          output.innerHTML = "Failed to generate content. Please try again.";
+        }
+      };
+
+      // Function to populate the output section when button is clicked
+      const button = document.getElementById("generateBtn");
+      button.addEventListener("click", async () => populate());
+    </script>
   </body>
 </html>
